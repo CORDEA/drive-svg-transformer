@@ -15,8 +15,17 @@ function main() {
 }
 
 function generateSvg() {
-  const rect = getSvgRect(10, 100, 120, 0, "black");
-  return getSvgBox(250, 250, rect);
+  const size = 250;
+  const center = size / 2;
+  const r = 60;
+  const angle = 0;
+  const radians = angle * (Math.PI / 180);
+  const circle = getSvgCircle(
+    center + r * Math.cos(radians),
+    center + r * Math.sin(radians),
+    5,
+    "black");
+  return getSvgBox(size, size, circle);
 }
 
 function getSvgBox(width, height, content) {
@@ -30,5 +39,11 @@ function getSvgBox(width, height, content) {
 function getSvgRect(width, height, x, y, color) {
   return `
   <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${color}" />
+  `
+}
+
+function getSvgCircle(cx, cy, r, color) {
+  return `
+  <circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}" />
   `
 }
