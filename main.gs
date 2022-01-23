@@ -11,15 +11,19 @@ function main() {
   }
   const file = files.next();
 
-  file.setContent(generateSvg());
+  file.setContent(drawClock());
 }
 
-function generateSvg() {
+function drawClock() {
+  const now = new Date();
+  const h = now.getHours();
+  const m = now.getMinutes();
+  const angle = h * (360 / 12) + m * (30 / 60);
+
   const size = 250;
   const center = size / 2;
   const r = 60;
-  const angle = 0;
-  const radians = angle * (Math.PI / 180);
+  const radians = (angle - 90) * (Math.PI / 180);
   const circle = getSvgCircle(
     center + r * Math.cos(radians),
     center + r * Math.sin(radians),
