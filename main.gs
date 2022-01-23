@@ -15,7 +15,8 @@ function main() {
 }
 
 function generateSvg() {
-  return getSvgBox(250, 250, "");
+  const rect = getSvgRect(10, 100, 120, 0, "black");
+  return getSvgBox(250, 250, rect);
 }
 
 function getSvgBox(width, height, content) {
@@ -23,5 +24,11 @@ function getSvgBox(width, height, content) {
   <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
   ${content}
   </svg>
+  `
+}
+
+function getSvgRect(width, height, x, y, color) {
+  return `
+  <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${color}" />
   `
 }
