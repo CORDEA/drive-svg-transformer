@@ -32,8 +32,11 @@ function drawClock() {
   const circle = getSvgCircle(
     center + r * Math.cos(radians),
     center + r * Math.sin(radians),
-    5,
-    "black");
+    30,
+    "#fb00a5",
+    0.3,
+    "none"
+  );
   children.push(circle);
   return getSvgBox(size, size, children);
 }
