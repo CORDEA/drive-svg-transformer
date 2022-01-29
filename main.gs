@@ -20,8 +20,12 @@ function drawClock() {
   const m = now.getMinutes();
   const angle = h * (360 / 12) + m * (30 / 60);
 
+  const children = [];
   const size = 250;
   const center = size / 2;
+
+  children.push(...getClockFrame(center));
+
   const r = 60;
   const radians = (angle - 90) * (Math.PI / 180);
   const circle = getSvgCircle(
@@ -29,13 +33,34 @@ function drawClock() {
     center + r * Math.sin(radians),
     5,
     "black");
-  return getSvgBox(size, size, circle);
+  children.push(circle);
+  return getSvgBox(size, size, children);
 }
 
-function getSvgBox(width, height, content) {
+function getClockFrame(center) {
+  const children = [];
+  const size = 4;
+  const r = 70;
+  for (let i = 0; i <= 12; i++) {
+    const angle = i * (360 / 12);
+    const radians = (angle - 90) * (Math.PI / 180);
+    children.push(
+      getSvgRect(
+        size,
+        size,
+        center + (r * Math.cos(radians)) - (size / 2),
+        center + (r * Math.sin(radians)) - (size / 2),
+        "black"
+      )
+    );
+  }
+  return children;
+}
+
+function getSvgBox(width, height, children) {
   return `
   <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
-  ${content}
+  ${children.join('\n')}
   </svg>
   `
 }
