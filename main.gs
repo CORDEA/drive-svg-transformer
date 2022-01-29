@@ -38,23 +38,10 @@ function drawClock() {
 }
 
 function getClockFrame(center) {
-  const children = [];
-  const size = 4;
-  const r = 70;
-  for (let i = 0; i <= 12; i++) {
-    const angle = i * (360 / 12);
-    const radians = (angle - 90) * (Math.PI / 180);
-    children.push(
-      getSvgRect(
-        size,
-        size,
-        center + (r * Math.cos(radians)) - (size / 2),
-        center + (r * Math.sin(radians)) - (size / 2),
-        "black"
-      )
-    );
-  }
-  return children;
+  return [
+    getSvgCircle(center, center, center - 10, "none", 0, "#aeaeae"),
+    getSvgCircle(center, center, center / 2, "#aeaeae", 0.2, "none"),
+  ];
 }
 
 function getSvgBox(width, height, children) {
@@ -66,13 +53,9 @@ function getSvgBox(width, height, children) {
 }
 
 function getSvgRect(width, height, x, y, color) {
-  return `
-  <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${color}" />
-  `
+  return `<rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${color}" />`
 }
 
-function getSvgCircle(cx, cy, r, color) {
-  return `
-  <circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}" />
-  `
+function getSvgCircle(cx, cy, r, color, opacity, stroke) {
+  return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}" fill-opacity="${opacity}" stroke="${stroke}" />`
 }
