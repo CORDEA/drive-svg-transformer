@@ -15,18 +15,19 @@ function main() {
 }
 
 function drawClock() {
+  const size = 500;
+
   const now = new Date();
   const h = now.getHours();
   const m = now.getMinutes();
   const angle = h * (360 / 12) + m * (30 / 60);
 
   const children = [];
-  const size = 250;
   const center = size / 2;
 
   children.push(...getClockFrame(center));
 
-  const r = 60;
+  const r = center / 2;
   const radians = (angle - 90) * (Math.PI / 180);
   const circle = getSvgCircle(
     center + r * Math.cos(radians),
